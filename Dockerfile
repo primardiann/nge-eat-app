@@ -28,4 +28,5 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Run Laravel — config:cache jangan di-build-time! error env!
-CMD ["sh", "-c", "php artisan config:clear && php artisan cache:clear && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8080"]
+CMD ["sh", "-c", "php artisan config:clear && php artisan view:clear && php artisan cache:clear && php artisan serve --host=0.0.0.0 --port=8080"]
+
