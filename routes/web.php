@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 
-Route::get('/', function () {
-    return redirect()->route('login');
+Route::get('/debug-login', function () {
+    return view('auth.login');
 });
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
