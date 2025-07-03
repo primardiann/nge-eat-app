@@ -26,7 +26,7 @@ class KategoriController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        Category::create(['name' => $request->name]);
+        Kategori::create(['name' => $request->name]);
 
         return redirect()->back()->with('success', 'Kategori berhasil ditambahkan.');
     } catch (\Throwable $e) {
