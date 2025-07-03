@@ -11,14 +11,11 @@ use App\Http\Controllers\ItemTerjualController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 
-/* Route::get('/', function () {
-    return redirect()->route('login');
-}); */
-
-Route::get('/debug', function () {
-    return phpinfo();
+Route::get('/dbtest', function () {
+    return DB::select("SHOW TABLES");
 });
 
 
