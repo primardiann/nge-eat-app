@@ -1,29 +1,33 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.navigation')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+@section('content')
+<div class="py-12" style="padding: 24px;">
+    <div style="max-width: 1120px; margin: auto; padding: 0 16px; display: flex; flex-direction: column; gap: 24px;">
+        
+        {{-- Bagian 2 form di atas (Update Profile dan Update Password) --}}
+        <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+            {{-- Card untuk Update Profile --}}
+            <div style="flex: 1; min-width: 300px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 12px; padding: 32px;">
+                <div style="max-width: 480px; margin: auto;">
+                    @include('profile.partials.update-profile-information-form')  {{-- Menggunakan partial untuk form update profile --}}
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+            {{-- Card untuk Update Password --}}
+            <div style="flex: 1; min-width: 300px; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 12px; padding: 32px;">
+                <div style="max-width: 480px; margin: auto;">
+                    @include('profile.partials.update-password-form')  {{-- Menggunakan partial untuk form update password --}}
                 </div>
             </div>
         </div>
+
+        {{-- Bagian Delete User --}}
+        <div style="background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 12px; padding: 24px;">
+            <div style="max-width: 420px; margin: auto;">
+                @include('profile.partials.delete-user-form')  {{-- Menggunakan partial untuk form delete user --}}
+            </div>
+        </div>
+
     </div>
-</x-app-layout>
+</div>
+@endsection
