@@ -20,8 +20,7 @@ class KategoriController extends Controller
 
 
     public function store(Request $request)
-{
-    try {
+    {
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
@@ -29,11 +28,7 @@ class KategoriController extends Controller
         Kategori::create(['name' => $request->name]);
 
         return redirect()->back()->with('success', 'Kategori berhasil ditambahkan.');
-    } catch (\Throwable $e) {
-        dd($e->getMessage()); // Lihat error aslinya bro
     }
-}
-
 
     public function update(Request $request, $id)
     {
