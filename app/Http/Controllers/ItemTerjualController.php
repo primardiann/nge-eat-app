@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
 class ItemTerjualController extends Controller
@@ -46,17 +47,21 @@ class ItemTerjualController extends Controller
                 'c.name as kategori',
                 DB::raw('MAX(t.harga) as harga'),
                 DB::raw('SUM(t.jumlah) as item_terjual'),
-                DB::raw('DATE_FORMAT(tf.tanggal, "%d-%m-%Y") as tanggal')
-            )
-            ->where('t.platform_id', $platformId);
+                DB::raw('DATE(tf.tanggal) as tanggal')
+            );
+
+        // Optional: kalau memang platform_id itu gak ada di tabel, hapus ini
+        if (Schema::hasColumn($transaksiItemTable, 'platform_id')) {
+            $query->where('t.platform_id', $platformId);
+        }
 
         if ($tanggalAwal && $tanggalAkhir) {
             $query->whereBetween('tf.tanggal', [$tanggalAwal, $tanggalAkhir]);
         }
 
         $items = $query
-            ->groupBy('m.id', 'm.name', 'c.name', DB::raw('DATE_FORMAT(tf.tanggal, "%d-%m-%Y")'))
-            ->orderByDesc(DB::raw('STR_TO_DATE(tanggal, "%d-%m-%Y")')) // supaya urut tanggal terbaru
+            ->groupBy('m.id', 'm.name', 'c.name', 'tf.tanggal')
+            ->orderByDesc('tf.tanggal') // aman dan natural urutannya
             ->orderByDesc('item_terjual')
             ->paginate(10)
             ->appends($request->except('page'));
