@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     try {
         DB::connection()->getPdo();
-        return response('🔥 Laravel jalan dan DB connect sukses!', 200);
+        return '🔥 DB CONNECTED!';
     } catch (\Exception $e) {
-        return response('❌ DB ERROR: '.$e->getMessage(), 500);
+        return '❌ DB ERROR: ' . $e->getMessage();
     }
 });
+
