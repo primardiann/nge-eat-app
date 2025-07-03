@@ -13,9 +13,12 @@ use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return redirect()->route('login');
-});
+}); */
+
+Route::get('/', fn () => '🔥 Laravel Jalan Bebas! DB? Otw juga!');
+
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
