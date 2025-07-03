@@ -12,8 +12,8 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DownloadController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/debug-login', function () {
-    return view('auth.login');
+Route::get('/', function () {
+    return view('login');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
