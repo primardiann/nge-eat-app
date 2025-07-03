@@ -23,11 +23,14 @@ RUN chmod -R 755 storage bootstrap/cache \
     && mkdir -p storage/framework/{sessions,views,cache} \
     && chown -R www-data:www-data storage bootstrap/cache
 
-# Set PORT env
-ENV PORT=8080
+# Clear & rebuild config cache
+RUN php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan config:cache
 
-# Expose port
+# Railway expects this
+ENV PORT=8080
 EXPOSE 8080
 
-# Start Laravel
+# Run Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
