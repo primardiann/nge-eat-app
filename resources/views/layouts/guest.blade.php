@@ -1,66 +1,46 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <title>Login - NgeEat</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'NgeEat') }}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
 
-    <!-- Tailwind & App CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @vite('resources/js/app.js')
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Tambahan CDN (jaga-jaga kalau style Tailwind dari Vite belum cukup) -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Styles & Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         body {
-            background-color: #FAFAFA;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Tambahan biar logo tetap rapi di tengah */
-        .login-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 450px;
             background-color: #FFF7F0;
-            border: 1px solid #F58220;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-radius: 12px;
         }
-
-        .login-logo {
-            width: 96px;
-            height: 96px;
+        .logo-ngeeat {
+            width: 90px;
+            height: 90px;
             object-fit: contain;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
     </style>
-
-    @stack('styles')
 </head>
-<body>
+<body class="font-sans text-gray-900 antialiased">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
 
-    <div class="login-wrapper">
-        <div class="login-card text-center">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo NgeEat" class="login-logo mx-auto">
+        {{-- Logo --}}
+        <div>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo NgeEat" class="logo-ngeeat mx-auto">
+        </div>
+
+        {{-- Card Form --}}
+        <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
         </div>
     </div>
-
-    @stack('scripts')
 </body>
 </html>
