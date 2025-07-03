@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 
-Route::get('/dbtest', function () {
-    return DB::select("SHOW TABLES");
+Route::get('/', function () {
+    return redirect()->route('login');
 });
-
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
