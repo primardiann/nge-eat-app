@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     DB::connection()->getPdo();
-    return '🔥 Laravel + DB connect sukses!';
+    return '🔥 Laravel + DB connect sukses aamin!';
 });
 
 

@@ -23,14 +23,9 @@ RUN chmod -R 755 storage bootstrap/cache \
     && mkdir -p storage/framework/{sessions,views,cache} \
     && chown -R www-data:www-data storage bootstrap/cache
 
-# Clear & rebuild config cache
-RUN php artisan config:clear \
-    && php artisan cache:clear \
-    && php artisan config:cache
-
-# Railway expects this
+# Railway requires this
 ENV PORT=8080
 EXPOSE 8080
 
-# Run Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+# Run Laravel — config:cache jangan di-build-time! error env!
+CMD ["sh", "-c", "php artisan config:clear && php artisan cache:clear && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=8080"]
