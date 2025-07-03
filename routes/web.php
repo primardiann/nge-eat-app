@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
     return redirect()->route('login');
 }); */
 
-Route::get('/', fn () => '🔥 Laravel Jalan Bebas! DB? Otw juga!');
+use Illuminate\Support\Facades\DB;
 
+Route::get('/', function () {
+    DB::connection()->getPdo(); // tes koneksi DB
+    return '🔥 Laravel udah nyala dan konek DB bro!';
+});
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
