@@ -20,24 +20,22 @@
 
     @stack('styles')
 </head>
-<body class="font-sans" x-data="{ sidebarOpen: window.innerWidth >= 768 }" x-init="window.addEventListener('resize', () => sidebarOpen = window.innerWidth >= 768)">
+<body style="margin: 0; font-family: Arial, sans-serif;" x-data="{ sidebarOpen: true }">
 
-    <div class="flex h-screen overflow-hidden">
+    <div style="display: flex; height: 100vh; overflow: hidden;">
 
         {{-- Sidebar --}}
-        <template x-if="sidebarOpen">
-            <x-sidebar />
-        </template>
+        <x-sidebar />
 
         {{-- Main Content --}}
-        <div class="flex flex-col flex-grow transition-all duration-300 ease-in-out"
-            :class="{ 'ml-[250px]': sidebarOpen && window.innerWidth >= 768, 'ml-0': !sidebarOpen || window.innerWidth < 768 }">
+        <div x-bind:style="{ marginLeft: sidebarOpen ? '250px' : '0px' }"
+            style="flex-grow: 1; display: flex; flex-direction: column; transition: margin-left 0.3s ease;">
 
             {{-- Topbar --}}
             <x-topbar />
 
             {{-- Konten Halaman --}}
-            <div class="flex-grow p-6 bg-gray-100 overflow-y-auto">
+            <div style="flex-grow: 1; padding: 24px; background-color: #FAFAFA; overflow-y: auto;">
                 @yield('content')
             </div>
         </div>
@@ -45,6 +43,6 @@
     </div>
 
     @stack('scripts')
-</body>
 
+</body>
 </html>
